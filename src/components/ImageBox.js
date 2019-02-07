@@ -2,7 +2,9 @@ import React from 'react';
 
 const ImageBox = (props) => {
     return(
-        <img src="..." className="img-fluid" alt="Responsive image" />
+        <div className="image-box">
+            <img src={props.imageUrl} className="img-fluid" alt="Responsive image" />
+        </div>
     );
 }
 

@@ -10,13 +10,14 @@ class Main extends Component {
         this.title = "Url-Img";
         this.btnName = "Take Screenshot ... ";
         this.state={
-          url:""
+          url:"",
+          imgUrl:""
         };
         this.takeUrl = this.takeUrl.bind(this);
         this.clickHandler = this.clickHandler.bind(this);
         this.accessKey = 'd2bc96d4b1d34674be1ad7196e79d601';
-        // this.format ="png";
-        // this.fullPage ="true";
+        this.format ="png";
+        this.fullPage ="true";
     }
     takeUrl(event){
       let value = event.target.value;
@@ -27,11 +28,11 @@ class Main extends Component {
     }
    
     clickHandler(){
-      axios.get(`https://api.apiflash.com/v1/urltoimage?access_key=${this.accessKey}&format=png&full_page=true&response_type=image&url=${this.state.url}`).then(data =>{
-        console.log("data",data);
-      }).catch(e=>{
-        console.log("Error is ",e);
-      });
+      
+      this.setState({
+        imgUrl:`https://api.apiflash.com/v1/urltoimage?access_key=${this.accessKey}&format=${this.format}&full_page=${this.fullPage}&response_type=image&url=${this.state.url}`
+      })
+        
     }
 
 
@@ -40,7 +41,8 @@ class Main extends Component {
       <div className="container">
         <Title name={this.title} />
         <UrlBox getUrl={this.takeUrl} btnName={this.btnName} click={this.clickHandler} />
-        <ImageBox />
+        <br />
+        <ImageBox imageUrl={this.state.imgUrl} /> 
       </div>
     );
   }
